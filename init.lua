@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -248,6 +248,7 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  'ryanoasis/vim-devicons', -- File icons
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -924,23 +925,24 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- AetherAmethyst theme with 'eclipse' (dark) or 'bliss' (light) variants
-    'AetherSyscall/AetherAmethyst.nvim',
+  { -- Monet colorscheme
+    'fynnfluegge/monet.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      require('aetheramethyst').setup {
-        transparent = true, -- Enable transparent background
-        styles = {
-          comments = { italic = true },
-          keywords = { italic = true },
-          functions = { bold = true },
-          variables = {},
-        },
+      require('monet').setup {
+        transparent_background = false,
+        semantic_tokens = true,
+        dark_mode = true,
+        highlight_overrides = {},
+        color_overrides = {},
+        styles = {},
       }
-
-      -- Load the variant: 'eclipse' (dark) or 'bliss' (light)
-      vim.cmd.colorscheme 'aetheramethyst-eclipse'
+      vim.cmd.colorscheme 'monet'
+      -- Make background transparent
+      vim.cmd('highlight Normal ctermbg=NONE guibg=NONE')
+      vim.cmd('highlight NormalNC ctermbg=NONE guibg=NONE')
+      vim.cmd('highlight SignColumn ctermbg=NONE guibg=NONE')
+      vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
     end,
   },
 
@@ -1024,13 +1026,13 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
