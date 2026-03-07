@@ -4,6 +4,21 @@
 -- See the kickstart.nvim README for more information
 return {
   {
+    'zaldih/themery.nvim',
+    config = function()
+      require('themery').setup {
+        themes = {
+          { name = 'Monet', colorscheme = 'monet' },
+          { name = 'Rosé Pine', colorscheme = 'rosepine' },
+          { name = 'Rosé Pine Moon', colorscheme = 'rosepine_moon' },
+          { name = 'Rosé Pine Dawn', colorscheme = 'rosepine_dawn' },
+        },
+        livePreview = true,
+      }
+    end,
+  },
+  { 'rose-pine/vim', name = 'rose-pine' },
+  {
     'junegunn/fzf.vim',
     dependencies = { 'junegunn/fzf', build = './install --all' },
   },
