@@ -8,12 +8,31 @@ return {
     config = function()
       require('themery').setup {
         themes = {
-          { name = 'Monet', colorscheme = 'monet' },
+          {
+            name = 'Monet',
+            colorscheme = 'monet',
+            before = [[
+              require('monet').setup {
+                transparent_background = false,
+                semantic_tokens = true,
+                dark_mode = true,
+                highlight_overrides = {},
+                color_overrides = {},
+                styles = {},
+              }
+            ]],
+          },
           { name = 'Rosé Pine', colorscheme = 'rosepine' },
           { name = 'Rosé Pine Moon', colorscheme = 'rosepine_moon' },
           { name = 'Rosé Pine Dawn', colorscheme = 'rosepine_dawn' },
         },
         livePreview = true,
+        globalAfter = [[
+          vim.cmd('highlight Normal ctermbg=NONE guibg=NONE')
+          vim.cmd('highlight NormalNC ctermbg=NONE guibg=NONE')
+          vim.cmd('highlight SignColumn ctermbg=NONE guibg=NONE')
+          vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
+        ]],
       }
     end,
   },
