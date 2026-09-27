@@ -129,6 +129,9 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.o.signcolumn = 'yes'
 
+-- Enable 24-bit RGB colors in the TUI
+vim.o.termguicolors = true
+
 -- Decrease update time
 vim.o.updatetime = 250
 
@@ -864,24 +867,15 @@ require('lazy').setup({
     },
   },
 
-  { -- Monet colorscheme
-    'fynnfluegge/monet.nvim',
+  { -- Duskhaven colorscheme
+    'kbraggins/duskhaven.nvim',
+    lazy = false,
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      require('monet').setup {
-        transparent_background = false,
-        semantic_tokens = true,
-        dark_mode = true,
-        highlight_overrides = {},
-        color_overrides = {},
-        styles = {},
+      require('duskhaven').setup {
+        transparent = false,
       }
-      vim.cmd.colorscheme 'monet'
-      -- Make background transparent
-      vim.cmd('highlight Normal ctermbg=NONE guibg=NONE')
-      vim.cmd('highlight NormalNC ctermbg=NONE guibg=NONE')
-      vim.cmd('highlight SignColumn ctermbg=NONE guibg=NONE')
-      vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
+      vim.cmd.colorscheme 'duskhaven'
     end,
   },
 
