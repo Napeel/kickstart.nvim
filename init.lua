@@ -968,9 +968,13 @@ require('lazy').setup({
     branch = 'master',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    init = function()
+      -- Fix compatibility with tree-sitter CLI >= 0.25 (which removed `--no-bindings`)
+      require('nvim-treesitter.install').ts_generate_args = { 'generate', '--abi', tostring(vim.treesitter.language_version) }
+    end,
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'yaml' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'latex', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'yaml' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
