@@ -87,6 +87,14 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- Enable faster startup by caching compiled Lua modules
 vim.loader.enable()
 
+-- Ensure macOS uses a valid CommandLineTools SDK to avoid malformed TAPI errors during native compilation (e.g. nvim-treesitter)
+if vim.fn.has 'mac' == 1 and vim.env.SDKROOT == nil then
+  local clt_sdk = '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk'
+  if vim.fn.isdirectory(clt_sdk) == 1 then
+    vim.env.SDKROOT = clt_sdk
+  end
+end
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -961,7 +969,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'yaml' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
