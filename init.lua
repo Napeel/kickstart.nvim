@@ -905,6 +905,7 @@ require('lazy').setup({
         transparent_background = false,
       }
       vim.cmd.colorscheme 'neonwave'
+      vim.g.colors_name = 'neonwave'
     end,
   },
 
