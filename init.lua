@@ -886,15 +886,17 @@ require('lazy').setup({
     },
   },
 
-  { -- Duskhaven colorscheme
-    'kbraggins/duskhaven.nvim',
+  { -- Neonwave colorscheme
+    'MiladGGG/neonwave.nvim',
     lazy = false,
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      require('duskhaven').setup {
-        transparent = false,
+      require('neonwave').setup {
+        intensity = 'soft',
+        background = 'dark',
+        transparent_background = false,
       }
-      vim.cmd.colorscheme 'duskhaven'
+      vim.cmd.colorscheme 'neonwave'
     end,
   },
 
